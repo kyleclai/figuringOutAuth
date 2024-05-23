@@ -72,6 +72,36 @@
     </div>
     
 
-    
+    <script>
+        function sendMessage() {
+            console.log(document)
+            console.log(JSON.stringify(document))
+            var messageInput = document.getElementById('messageInput');
+            console.log(JSON.stringify(messageInput.value))
+            var message = messageInput.value.trim();
+            if (message !== '') {
+                var messagesContainer = document.getElementById('messages');
+                var messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.innerHTML = '<span class="sender">You:</span> ' + message + '<span class="timestamp"> - ' + getCurrentTime() + '</span>';
+                messagesContainer.appendChild(messageElement);
+                messageInput.value = '';
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+        
+
+        function getCurrentTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var timeString = hours + ':' + minutes + ' ' + ampm;
+            return timeString;
+        }
+    </script>
 </body>
 </html>
